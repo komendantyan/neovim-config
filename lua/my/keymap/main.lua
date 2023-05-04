@@ -45,7 +45,15 @@ function set_lsp(bufnr)
   buf_callback('<S-F12>', vim.lsp.buf.references)
 end
 
+function set_quickfix()
+  local function map(lhs, rhs) vim.api.nvim_set_keymap('n', lhs, rhs, {noremap=true, silent=true}) end
+
+  map('q', ':quit<CR>')
+end
+
+
 return {
     set_global = set_global,
     set_lsp = set_lsp,
+    set_quickfix = set_quickfix,
 }
