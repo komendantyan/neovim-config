@@ -5,6 +5,8 @@ local g = vim.g
 -- filetype plugin indent on
 -- syntax on
 
+opt.mouse = ""
+
 ------------ tab --------------------
 opt.tabstop = 4
 opt.shiftwidth = 0  -- same as tabstop
