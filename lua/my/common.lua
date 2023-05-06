@@ -48,5 +48,9 @@ opt.ttyfast = true
 opt.cursorline = true
 opt.colorcolumn = '80,100,200'
 
+----------- conceal ------------------
+opt.conceallevel = 2
+opt.concealcursor = 'nc'
+
 ----------- modeline ----------------
 opt.modeline = true

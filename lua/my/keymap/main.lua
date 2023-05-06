@@ -1,8 +1,8 @@
 function set_global()
   -- f-keys
-  local function map(lhs, rhs) vim.api.nvim_set_keymap('n', lhs, rhs, {noremap=true}) end
+  local function map(lhs, rhs) vim.api.nvim_set_keymap('n', lhs, rhs, {noremap=true, silent=true}) end
   map('<F2>', ':NvimTreeToggle<CR>')
-  map('<S-F2>', ':NvimTreeFindFileToggle<CR>')
+  map('<S-F2>', ':NvimTreeFindFileToggle!<CR>')
 
   map('<S-Left>', ':bprevious<CR>')
   map('<S-Right>', ':bnext<CR>')
@@ -15,6 +15,8 @@ function set_global()
 
   map('<Tab>', '>>')
   map('<S-Tab>', '<<')
+
+  map('<C-P>', ':Telescope commands<CR>')
 end
 
 function set_lsp(bufnr)

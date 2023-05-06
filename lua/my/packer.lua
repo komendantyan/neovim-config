@@ -78,6 +78,14 @@ require('packer').startup {
             config = function() require('my.plugin_configs.Comment') end,
         }
 
+        -- use {'kevinhwang91/nvim-bqf'}
+
+        use {
+          'nvim-telescope/telescope.nvim',
+          requires = { {'nvim-lua/plenary.nvim'} },
+          config = function() require('my.plugin_configs.telescope') end,
+        }
+
         -- Automatically set up your configuration after cloning packer.nvim
         -- Put this at the end after all plugins
         if packer_bootstrap then
