@@ -48,6 +48,10 @@ function set_lsp(bufnr)
       vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, '', {noremap=true, silent=true, callback=callback})
   end
 
+  local function buf_map(lhs, rhs)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, rhs, {noremap=true, silent=true})
+  end
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_callback('gD', vim.lsp.buf.declaration)
   buf_callback('gd', vim.lsp.buf.definition)
@@ -67,8 +71,13 @@ function set_lsp(bufnr)
   buf_callback('<space>q', vim.diagnostic.setloclist)
   buf_callback('<space>f', vim.lsp.buf.formatting)
 
-  buf_callback('<F12>', vim.lsp.buf.definition)
-  buf_callback('<S-F12>', vim.lsp.buf.references)
+  if vim.fn.exists(':Telescope') > 0 then
+    buf_callback('<F12>', function() require('telescope.builtin').lsp_definitions() end)
+    buf_callback('<S-F12>', function() require('telescope.builtin').lsp_references({jump_type="never"}) end)  -- with jump it opens some strange buffer without name
+  else
+    buf_callback('<F12>', vim.lsp.buf.definition)
+    buf_callback('<S-F12>', vim.lsp.buf.references)
+  end
 end
 
 function set_quickfix()

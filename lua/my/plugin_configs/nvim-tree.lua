@@ -16,4 +16,14 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = true,
   },
+  view = {
+    width = 50,
+  },
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = false
+      },
+    }
+  }
 })
