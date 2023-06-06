@@ -1,6 +1,14 @@
+local _STATE = {}
+
 function set_global()
   -- f-keys
   local function map(lhs, rhs) vim.api.nvim_set_keymap('n', lhs, rhs, {noremap=true, silent=true}) end
+
+
+  local function map_callback(lhs, callback)
+      vim.api.nvim_set_keymap('n', lhs, '', {noremap=true, silent=true, callback=callback})
+  end
+
   map('<F2>', ':NvimTreeToggle<CR>')
   map('<S-F2>', ':NvimTreeFindFileToggle!<CR>')
 
@@ -11,7 +19,23 @@ function set_global()
 
   map('<Leader>w', ':set wrap!<CR>')
   map('<Leader>n', ':set number!<CR>')
-  map('<Leader>p', ':set paste!<CR>')
+  map_callback('<Leader>p', function()
+      -- TODO move to misc
+      prev_conceallevel = _STATE["prev_conceallevel"] or 0
+      prev_colorcolumn = _STATE["prev_colorcolumn"] or {}
+      prev_number = _STATE["prev_number"] or false
+      prev_paste = _STATE["prev_paste"] or false
+
+      _STATE["prev_conceallevel"] = vim.opt.conceallevel:get()
+      _STATE["prev_colorcolumn"] = vim.opt.colorcolumn:get()
+      _STATE["prev_number"] = vim.opt.number:get()
+      _STATE["prev_paste"] = vim.opt.paste:get()
+
+      vim.opt.conceallevel = prev_conceallevel
+      vim.opt.colorcolumn = prev_colorcolumn
+      vim.opt.number = prev_number
+      vim.opt.paste = prev_paste
+  end)
 
   map('<Tab>', '>>')
   map('<S-Tab>', '<<')
