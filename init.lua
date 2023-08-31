@@ -10,4 +10,4 @@ commands.set_global()
 require('my.lsp.pylsp')
 require('my.lsp.lua_ls')
 
-require('my.misc.quickfix')
+require('my.misc.filetype_specific')

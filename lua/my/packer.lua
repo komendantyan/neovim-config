@@ -56,10 +56,12 @@ require('packer').startup {
             "neovim/nvim-lspconfig",
         }
 
-        -- use {
-        --   'nvim-treesitter/nvim-treesitter',
-        --   -- config = function() vim.cmd [[TSUpdate]] end
-        -- }
+        use {
+          'nvim-treesitter/nvim-treesitter',
+          config = function() vim.cmd [[TSUpdate]] end
+        }
+
+        use 'theprimeagen/jvim.nvim'
 
         use {
             'hrsh7th/nvim-cmp',

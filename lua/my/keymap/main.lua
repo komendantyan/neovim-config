@@ -87,8 +87,23 @@ function set_quickfix()
 end
 
 
+function set_json_filetype()
+  local bufnr = 0
+  local function buf_callback(lhs, callback)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, '', {noremap=true, silent=true, callback=callback})
+  end
+
+  local jvim = require("jvim")
+  buf_callback('<M-left>', jvim.to_parent)
+  buf_callback('<M-right>', jvim.descend)
+  buf_callback('<M-up>', jvim.prev_sibling)
+  buf_callback('<M-down>', jvim.next_sibling)
+end
+
+
 return {
     set_global = set_global,
     set_lsp = set_lsp,
     set_quickfix = set_quickfix,
+    set_json_filetype = set_json_filetype,
 }
